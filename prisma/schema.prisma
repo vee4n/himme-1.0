@@ -1,0 +1,37 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Participant {
+  id        Int      @id @default(autoincrement())
+  name      String
+  nim       String   @unique
+  email     String
+  phone     String
+  groupId   Int
+  group     Group    @relation(fields: [groupId], references: [id])
+  checkInId Int?
+  checkIn   CheckIn? @relation(fields: [checkInId], references: [id])
+  pickedUp  Boolean @default(false)
+}
+
+model Group {
+  id           Int           @id @default(autoincrement())
+  name         String        @unique
+  participants Participant[]
+  pic          String
+}
+
+model CheckIn {
+  id          Int           @id @default(autoincrement())
+  date        DateTime      @default(now())
+  Participant Participant[]
+}
