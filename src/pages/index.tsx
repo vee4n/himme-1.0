@@ -15,7 +15,6 @@ export default function Home() {
     if (user.status === 200) {
       router.push("/dashboard");
     } else {
-      setIsLoading(false);
       window.alert("Incorrect password");
     }
   };
