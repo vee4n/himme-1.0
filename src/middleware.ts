@@ -14,12 +14,14 @@ export default async function middleware(req: NextRequest) {
 
   if (PROTECTED_ROUTES.filter((route) => route.test(currentUrl)).length > 0) {
     if (!token) {
+      console.log("Redirecting to home: no token");
       return NextResponse.redirect(redirectUrl);
     }
 
     try {
       await verify(token, SECRET);
     } catch (e) {
+      console.log("Redirecting to home: invalid token");
       return NextResponse.redirect(redirectUrl);
     }
   }
