@@ -13,7 +13,7 @@ export default function Home() {
     e.preventDefault();
     const user = await fetcher("auth/login", { password });
     if (user.status === 200) {
-      router.push("/dashboard");
+      router.replace("/dashboard");
     } else {
       window.alert("Incorrect password");
     }
