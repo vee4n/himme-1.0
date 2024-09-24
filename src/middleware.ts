@@ -12,19 +12,15 @@ export default async function middleware(req: NextRequest) {
   const redirectUrl = nextUrl.clone();
   redirectUrl.pathname = "/";
 
-  if (PROTECTED_ROUTES.some((route) => route.test(currentUrl))) {
+  if (PROTECTED_ROUTES.filter((route) => route.test(currentUrl)).length > 0) {
     if (!token) {
-      console.log("Redirecting to home: No token found.");
       return NextResponse.redirect(redirectUrl);
     }
 
     try {
       await verify(token, SECRET);
     } catch (e) {
-      console.error('Token verification error:', e);
       return NextResponse.redirect(redirectUrl);
     }
   }
-
-  return NextResponse.next(); // Allow the request to continue if authenticated
 }
