@@ -21,8 +21,6 @@ export default async function middleware(req: NextRequest) {
     try {
       await verify(token, SECRET);
     } catch (e) {
-      console.log("Redirecting to home: invalid token");
-      console.error("Token verification error:", e);
       return NextResponse.redirect(redirectUrl);
     }
   }
