@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { SECRET } from "~/lib/env";
 import { verify } from "~/lib/jwt";
 
-const PROTECTED_ROUTES = [/\/dashboard/];
+const PROTECTED_ROUTES = [/\/dashboard/, /\/check-in\/.+/];
 
 export default async function middleware(req: NextRequest) {
   const { cookies, nextUrl } = req;
