@@ -11,7 +11,7 @@ export default function Home() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Password:", process.env.PASSWORD);
+    setIsLoading(true);
     const user = await fetcher("auth/login", { password });
     if (user.status === 200) {
       router.push("/dashboard");
