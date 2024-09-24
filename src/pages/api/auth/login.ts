@@ -25,7 +25,7 @@ export default async function handler(
       httpOnly: true,
       maxAge: 3600 * 2, // Cookie expires in 2 hours
       path: "/",
-      sameSite: "none",
+      sameSite: "lax",
     })
   );
 
